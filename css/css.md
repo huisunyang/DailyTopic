@@ -111,3 +111,6 @@ w3c标准盒子模型中 属性width,height只包含content,不包含border和pa
     3、给父盒子设置一个overflow:hidden
     4、设置浮动
     5、display:inline-block
+
+### src和href的区别
+    src用于替换当前元素，href用于在当前翁党和引用资源之间确立关系
