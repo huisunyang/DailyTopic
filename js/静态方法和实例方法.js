@@ -9,3 +9,8 @@ Person.say=function(){
 Person.prototype.getName=function(name){
     console.log('My name is '+name);
 }
+
+let arrowFunc = (...c) => {
+    console.log(c)
+}
+arrowFunc(1,2,3)
