@@ -13,3 +13,4 @@ const flattenDeep = arr => Array.isArray(arr) ? arr.reduce((a,b)=> [...a,...flat
 
 
 console.log(flattenDeep(arr2))
+
