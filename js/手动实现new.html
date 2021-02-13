@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function create() {
+  // 创建一个空的对象
+  let obj = new Object()
+  // 获得构造函数
+  let Con = [].shift.call(arguments)
+  console.log('1111', Con)
+  console.log('1111', arguments)
+  // 链接到原型
+  obj.__proto__ = Con.prototype
+  // 绑定到this 执行构造函数
+  let result = Con.apply(obj,arguments)
+  // 确保new出来的是个对象
+  return typeof result === 'object' ? result : obj
+}
+
+function Person (name,age){
+  this.name = name;
+  this.age = age;
+  this.say = function () {
+      console.log("I am " + this.name)
+  }
+}
+let person2 = create (Person,"Curry",18);
+console.log(person2.name);      //"Curry"
+console.log(person2.age);       //18
+person2.say(); 
+  </script>
+</body>
+</html>
