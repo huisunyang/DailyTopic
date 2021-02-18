@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 防抖  在事件被触发n秒之后再执行回调 如果在这n秒内又被重新触发 则重新计时 -->
+   <input type="text" id="unDebounce">
+  <script>
+    //模拟一段ajax请求
+    function ajax(content) {
+      console.log(this)
+      console.log('ajax request ' + content)
+    }
+   function debounce (fun,delay) {
+     console.log(fun)
+     return function (args) {
+       let that = this
+       let _args = args
+       clearTimeout(fun.id)
+       fun.id = setTimeout(function () {
+        fun.call(that,_args) // 这里为什么要利用call改变this指向？？？ setTimout 中this指向window
+       },delay)
+     }
+   }
+    let inputa = document.getElementById('unDebounce')
+    let debounceAjax = debounce(ajax, 500)
+    inputa.addEventListener('keyup', function (e) {
+      debounceAjax(e.target.value)
+    })
+
+  </script>
+</body>
+</html>

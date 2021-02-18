@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 函数节流 一段时间内只执行一次 无论这段时间内触发了多少次 只有一次生效 -->
+  <input type="text" id="throttle">
+  <script>
+//模拟一段ajax请求
+  function ajax(content) {
+    console.log('ajax request ' + content)
+  }
+  function throttle(fn, delay) {
+    var timer;
+    return function () {
+        var _this = this;
+        var args = arguments;
+        if (timer) {
+            return;
+        }
+        timer = setTimeout(function () {
+            fn.apply(_this, args);
+            timer = null; // 在delay后执行完fn之后清空timer，此时timer为假，throttle触发可以进入计时器
+        }, delay)
+    }
+}
+  function throttle (fn,delay) {
+    var timer
+    return function (args) {
+      var _this = this
+      if (timer) {
+        return
+      }
+      timer = setTimeout(function () {
+        fn.apply(_this,args)
+        timer = null
+      },delay)
+    }
+  }
+
+    let throttleAjax = throttle(ajax, 1000)
+
+    let inputc = document.getElementById('throttle')
+    inputc.addEventListener('keyup', function(e) {
+        throttleAjax(e.target.value)
+    })
+
+  </script>
+</body>
+</html>
