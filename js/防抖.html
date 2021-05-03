@@ -11,11 +11,11 @@
   <script>
     //模拟一段ajax请求
     function ajax(content) {
-      console.log(this)
-      console.log('ajax request ' + content)
+      // console.log(this)
+      console.log('ajax request ' + content + ' time:'+ new Date().toLocaleTimeString())
     }
    function debounce (fun,delay) {
-     console.log(fun)
+    //  console.log(fun)
      return function (args) {
        let that = this
        let _args = args

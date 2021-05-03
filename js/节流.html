@@ -11,7 +11,7 @@
   <script>
 //模拟一段ajax请求
   function ajax(content) {
-    console.log('ajax request ' + content)
+    console.log('ajax request ' + content + ' time:'+ new Date().toLocaleTimeString())
   }
   function throttle(fn, delay) {
     var timer;
@@ -27,17 +27,35 @@
         }, delay)
     }
 }
-  function throttle (fn,delay) {
-    var timer
+  // function throttle (fn,delay) {
+  //   var timer
+  //   return function (args) {
+  //     var _this = this
+  //     if (timer) {
+  //       return
+  //     }
+  //     timer = setTimeout(function () {
+  //       fn.apply(_this,args)
+  //       timer = null
+  //     },delay)
+  //   }
+  // }
+  function throttle (fun,delay){
+    let last,deferTimer
     return function (args) {
-      var _this = this
-      if (timer) {
-        return
+      var that = this
+      var _args = args
+      var now = +new Date()
+      if (last && now < last + delay) {
+        clearTimeout(deferTimer)
+        deferTimer = setTimeout(function () {
+          last = now
+          fun.call(that,_args)
+        },delay)
+      } else {
+        last = now
+        fun.call(that,_args)
       }
-      timer = setTimeout(function () {
-        fn.apply(_this,args)
-        timer = null
-      },delay)
     }
   }
 
