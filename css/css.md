@@ -22,7 +22,7 @@ w3c标准盒子模型中 属性width,height只包含content,不包含border和pa
       background-color: pink;
     }
     ```
-    块级元素    margin:0 auto;
+    块级元素    margin:0 auto; // 只能实现水平居中，且对浮动元素和绝对定位元素无效
 
     绝对定位实现
     ```
@@ -92,6 +92,23 @@ w3c标准盒子模型中 属性width,height只包含content,不包含border和pa
       background-color: pink;
       white-space: normal;
       vertical-align: middle;
+    }
+    利用表格布局
+    .container {
+      background: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      font-size: 0;
+      width: 600px;
+      height: 600px;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .box {
+      display: inline-block;
+      width: 500px;
+      height: 400px;
+      background-color: pink;
+      white-space: normal;
     }
     ```
 ### 高度塌陷

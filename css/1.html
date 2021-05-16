@@ -6,36 +6,65 @@
   <title>Document</title>
   <style>
   .container {
-    position: fixed;
+    /* position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: 0; */
     background: rgba(0, 0, 0, 0.5);
     text-align: center;
     font-size: 0;
-    white-space: nowrap;
-    overflow: auto;
+    width: 600px;
+    height: 600px;
+    display: table-cell;
+    vertical-align: middle;
+    /* white-space: nowrap;
+    overflow: auto; */
   }
-  .container::after {
+  /* .container::after {
     content: '';
     display: inline-block;
     height: 100%;
     vertical-align: middle;
-  }
+  } */
   .box {
     display: inline-block;
     width: 500px;
     height: 400px;
     background-color: pink;
     white-space: normal;
-    vertical-align: middle;
+    /* vertical-align: middle; */
+  }
+  .sanjiaoxing {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid red;
+  }
+  .outer {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    background-color: turquoise;
+  }
+  .item{
+    /* width: 100px;
+    height: 100px; */
+    flex: 1;
+    background-color: red;
   }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="box"></div>
+  </div>
+    <div class="sanjiaoxing"></div>
+  <div class="outer">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
   </div>
 </body>
 </html>
