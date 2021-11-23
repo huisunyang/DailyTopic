@@ -36,7 +36,30 @@
    instanceof只能正确判断引用数据类型 而不能判断基本数据类型
   
 
+  constructor
+
+  console.log((2).constructor === Number); // true
+  console.log((true).constructor === Boolean); // true
+  console.log(('str').constructor === String); // true
+  console.log(([]).constructor === Array); // true
+  console.log((function() {}).constructor === Function); // true
+  console.log(({}).constructor === Object); // true
+
+  constructor有两个作用，一是判断数据的类型，二是实例通过constructor对象访问它的构造函数，需要注意，如果创建一个对象来改变它的原型，constructor就不能用来判断数据类型了
+  
+  function Fn(){};
+ 
+  Fn.prototype = new Array();
+  
+  var f = new Fn();
+  
+  console.log(f.constructor===Fn);    // false
+  console.log(f.constructor===Array); // true
    
+
+
+
+  
  Object.prototype.toString.call() 利用call借用Object的toString方法
    
    Object.prototype.toString.call(2) // [object Number]
@@ -58,6 +81,20 @@
  */
 
 
+/**
+ * 类型转化
+ * 注意点：
+ *  1、原始值转数字： 
+ *    利用Number转化： 如果通过 Number 转换函数传入一个字符串，它会试图将其转换成一个整数或浮点数，而且会忽略所有前导的 0，如果有一个字符不是数字，结果都会返回 NaN
+ *    parseInt(string,radix): 当radix不填写时默认当做十进制处理，但注意10并不是默认值，当字符串以0x开头是会直接处理为16进制
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 
-
-// parseInt的第二个参数表示进位数
