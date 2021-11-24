@@ -59,7 +59,7 @@
 
 
 
-  
+
  Object.prototype.toString.call() 利用call借用Object的toString方法
    
    Object.prototype.toString.call(2) // [object Number]
@@ -79,6 +79,35 @@
 
 
  */
+ function myInstanceOf (left,right) {
+   // 获得实例对象的原型
+   let proto = Object.getPrototypeOf(left)
+   // 获得构造函数的prototype对象
+   let prototype = right.prototype
+   while(true) {
+     if (!proto) return false;
+     if (proto === prototype) return true;
+     // 如果没有找到 就继续从其原型上找 
+     proto = Object.getPrototypeOf(proto)
+   }
+ }
+/**
+ * typeof null 为object的解释说明
+ * “typeof null”错误是 JavaScript 第一个版本的残余。在这个版本中，值以 32 位为单位存储，它由一个小型标签（1-3 位）和值的实际数据组成。类型标签存储在单元的低位中。其中有五个
+ * 
+ * 000：对象。数据是对对象的引用。
+ * 1：整数。数据是一个 31 位有符号整数。
+ * 010：双倍。数据是对双浮点数的引用。
+ * 100：字符串。数据是对字符串的引用。
+ * 110：布尔值。数据是一个布尔值。
+ * 也就是说，最低位是任一位，那么类型标签只有一位长。或者它是零，那么类型标签的长度是三位，为四种类型提供两个额外的位。
+ * 两个特殊值：
+ *    undefined ( JSVAL_VOID ) 是整数 -2 30（整数范围之外的数字）。
+ *    null ( JSVAL_NULL ) 是机器码空指针。或者：一个对象类型标签加上一个为零的引用。
+ * 
+ * 参考链接： https://2ality.com/2013/10/typeof-null.html (需翻墙)
+ */
+
 
 
 /**
@@ -98,3 +127,23 @@
  * 
  */
 
+
+/**
+ * 精度丢失问题
+ * 0.1 + 0.2 !== 0.3 
+ * 计算机是通过二进制的方式存储数据的，所以计算机计算0.1+0.2的时候，实际上是计算的两个数的二进制的和。0.1的二进制是0.0001100110011001100...（1100循环），0.2的二进制是：0.00110011001100...（1100循环），这两个数的二进制都是无限循环的数。
+ * 一般我们认为数字包括整数和小数，但是在 JavaScript 中只有一种数字类型：Number，它的实现遵循IEEE 754标准，使用64位固定长度来表示，也就是标准的double双精度浮点数。在二进制科学表示法中，双精度浮点数的小数部分最多只能保留52位，再加上前面的1，其实就是保留53位有效数字，剩余的需要舍去，遵从“0舍1入”的原则
+ * 根据这个原则，0.1和0.2的二进制数相加，再转化为十进制数就是：0.30000000000000004。
+ * 
+ * 
+ * 解决精度丢失问题：
+ *    设置一个误差范围，通常称为机器精度（Number.EPSILON）
+ *    (0.1+0.2) -0.3 < Number.EPSILON // true
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
