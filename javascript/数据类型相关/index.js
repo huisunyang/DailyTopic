@@ -147,3 +147,25 @@
  * 
  * 
  */
+
+
+/**
+ * 获得一个安全的undefined值
+ * const a = void 0
+ */
+
+/**
+ * isNaN 和 Number.isNaN函数的区别？
+ *  isNaN接收参数后，会尝试将这个参数转化为数字类型，任何不能转化为数值的值都会返回true，传入非数字也会返回true
+ *  isNaN('test') // true
+ * 
+ * Number.isNaN会先判断传入内容是否为数字 ，如果是数字再进行判断，
+ * 
+ */
+ Number.isNaN = function(n) {
+  return (
+    typeof n === 'number' &&
+           window.isNaN(n)
+  );
+};
+
