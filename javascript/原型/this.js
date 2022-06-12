@@ -50,3 +50,5 @@ let p = {
 }
 
 console.log(Person.fullname.call(p)) // 此处即为让p去调用Person的fullname方法 fullname方法中的this是指向p的
+
+
